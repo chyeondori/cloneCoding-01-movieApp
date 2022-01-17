@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!-- /* React JS => 앤진과 같음, UI를 interactive 하게 */ -->
+<!-- /* React dom => 모든 React element들을 HTML body에 둘 수 있도록 함. */ -->
+<!-- /* HTML 요소라면 <button></button> 버튼 태그. */ -->
+<!-- /* React component라면 대문자로 <Button />. */ -->
+<html>
+
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+
+    const root = document.getElementById("root");
+    function MinutesToHours() {
+        // useState => array 제공, 첫 번째 element가 현재의 값이 됨.
+        const [amount, setAmount] = React.useState(0)
+        const [inverted, setInverted] = React.useState(false);
+        const onChange = (event) => {
+            setAmount(event.target.value)
+        };
+        const reset = () => setAmount(0);
+        // const onFlip = () => setFlipped(!Flipped);
+        const onInvert = () => {
+            reset();
+            setInverted((current) => !current);
+        }
+        return (
+            <div>
+
+                <label htmlFor="amount">Minutes</label>
+                <div>
+                    <input
+                        value={inverted ? amount * 60 : amount}
+                        id="minutes"
+                        placeholder="Minutes"
+                        type="number"
+                        onChange={onChange}
+                        disabled={inverted}
+                    // disabled={flipped === true}
+                    />
+                </div>
+
+                <h4> you want to convert {amount}</h4>
+                <label htmlFor="hours">Hours</label>
+                <div>
+                    <input
+                        value={inverted ? amount : Math.round(amount / 60)}
+                        id="hours"
+                        placeholder="Hours"
+                        type="number"
+                        onChange={onChange}
+                        disabled={!inverted}
+                    // disabled={flipped === false} 
+                    />
+                </div>
+
+                <button onClick={reset}> Reset </button>
+                <button onClick={onInvert}> {inverted ? "Turn back" : "inverted"} </button>
+
+            </div>
+        )
+    };
+
+    function KmToMiles() {
+        return <h3>KM 2 M</h3>;
+    }
+
+    function App() {
+        const [index, setIndex] = React.useState("xx")
+        const onSelect = (event) => {
+            setIndex(event.target.value);
+        }
+        console.log('render w/', index)
+        return (
+            <div>
+
+                <h1 className="hi">Super Converter</h1>
+
+                <select value={index} onChange={onSelect}>
+                    <option value="xx">Select your units</option>
+                    <option value="0"> Minutes & Hours </option>
+                    <option value="1"> Km & Miles </option>
+                </select>
+
+                <hr />
+                {index === "xx" ? "Please select your units" : null}
+                {index === "0" ? <MinutesToHours /> : null}
+                {index === "1" ? <KmToMiles /> : null}
+
+            </div>
+        )
+    };
+
+    // render : show it to user
+    // ReactDOM.render(<Container />, root)  /* => React element들을 root div  안에서 보여줘 */
+    ReactDOM.render(<App />, root);
+</script>
+
+</html>
