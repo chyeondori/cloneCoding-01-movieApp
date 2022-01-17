@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!-- /* React JS => 앤진과 같음, UI를 interactive 하게 */ -->
+<!-- /* React dom => 모든 React element들을 HTML body에 둘 수 있도록 함. */ -->
+<!-- /* HTML 요소라면 <button></button> 버튼 태그. */ -->
+<!-- /* React component라면 대문자로 <Button />. */ -->
+<html>
+
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+
+    function SaveBtn() {
+        return <button>Save Changes</button>
+    }
+    function ConfirmBtn(){
+        return<button>Confirm</button>
+    }
+
+    function App() {
+        
+        return (
+            <div>
+                <SaveBtn />
+                <ConfirmBtn />
+            </div>
+        )
+    };
+
+    // render : show it to user
+    // ReactDOM.render(<Container />, root)  /* => React element들을 root div  안에서 보여줘 */
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+</script>
+
+</html>
